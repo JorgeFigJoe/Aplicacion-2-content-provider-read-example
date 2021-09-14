@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Aplicacion2</string>
+    <string name="heading">Acceso a datos por DataProvider</string>
+    <string name="loadButtonText">Leer datos app 1</string>
+</resources>
