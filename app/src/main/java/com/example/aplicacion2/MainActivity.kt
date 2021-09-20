@@ -8,11 +8,24 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     var CONTENT_URI = Uri.parse("content://com.demo1.user.provider/users")
+    var contentProviderId = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val newString: String?
+        newString = if (savedInstanceState == null) {
+            val extras = intent.extras
+            extras?.getString("contentProviderID")
+        } else {
+            savedInstanceState.getSerializable("contentProviderID") as String?
+        }
+
+        if (newString != null) {
+            contentProviderId = newString
+        }
     }
 
     fun onClickShowDetails(view: View?) {
@@ -20,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val resultView = findViewById<View>(R.id.res) as TextView
 
 
-        val cursor = contentResolver.query(Uri.parse("content://com.demo1.user.provider/users"), null, null, null, null)
+        val cursor = contentResolver.query(Uri.parse(contentProviderId), null, null, null, null)
 
        
         if (cursor!!.moveToFirst()) {
